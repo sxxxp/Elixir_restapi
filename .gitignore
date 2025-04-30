@@ -30,4 +30,4 @@ restapi-*.tar
 *.sqlite3
 
 # Ignore the log files
-*.log
+# *.log
