@@ -6,6 +6,7 @@ COPY mix.exs mix.lock ./
 COPY lib ./lib
 COPY config ./config
 COPY test ./test
+COPY chat_logs ./chat_logs
 
 RUN apt-get update && \
     mix local.hex --force && \
