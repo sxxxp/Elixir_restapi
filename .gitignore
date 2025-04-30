@@ -29,6 +29,5 @@ restapi-*.tar
 *.db
 *.sqlite3
 
-# Ignore the log file
-/chat_logs/
+# Ignore the log files
 *.log
