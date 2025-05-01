@@ -9,7 +9,7 @@ defmodule MyRouter do
   use Plug.ErrorHandler
 
   get "/" do
-    send_resp(conn, 200, "hello!")
+    send_resp(conn, 200, "hello guest!")
   end
 
   forward("/user", to: MyRouter.UserRouter)
