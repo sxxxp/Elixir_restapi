@@ -2,7 +2,15 @@ defmodule Struct.Chat do
   @enforce_keys [:type, :user, :message, :time]
   defstruct [
     :type,
-    time: %MyTime{year: 0000, month: 00, day: 00, hour: 00, minute: 00},
+    time: %MyTime{
+      year: 0000,
+      month: 00,
+      day: 00,
+      hour: 00,
+      minute: 00,
+      second: 00,
+      millisecond: 000
+    },
     user: "[system]",
     message: "error"
   ]

@@ -1,6 +1,6 @@
 defmodule MyTime do
-  @enforce_keys [:year, :month, :day, :hour, :minute]
-  defstruct [:year, :month, :day, :hour, :minute]
+  @enforce_keys [:year, :month, :day, :hour, :minute, :second, :millisecond]
+  defstruct [:year, :month, :day, :hour, :minute, :second, :millisecond]
 
   @moduledoc """
   MyTime struct for time management
@@ -19,12 +19,12 @@ defmodule MyTime do
   formats:
   - :date: "YYYY:MM:DD"
   - :short: "HH:MM"
-  - any: "YYYY:MM:DD:HH:MM"
+  - any: "YYYY:MM:DD:HH:MM:SS:MS"
   """
   def converter(%MyTime{} = msg), do: msg
 
   def converter(msg) do
-    [year, month, day, hour, minute] =
+    [year, month, day, hour, minute, second, millisecond] =
       msg
       |> String.split(":")
 
@@ -33,24 +33,31 @@ defmodule MyTime do
       month: month,
       day: day,
       hour: hour,
-      minute: minute
+      minute: minute,
+      second: second,
+      millisecond: millisecond
     }
   end
 
   def getraw(%MyTime{} = t) do
-    String.to_integer(t.year) * 1_000_000_000 + String.to_integer(t.month) * 1_000_000 +
-      String.to_integer(t.day) * 1_000 + String.to_integer(t.hour) * 100 +
-      String.to_integer(t.minute)
+    float =
+      ((String.to_integer(t.second) +
+          String.to_integer(t.millisecond) / 1000) / 100)
+      |> Float.round(5)
+
+    String.to_integer(t.year) * 1_00_00_00_00 + String.to_integer(t.month) * 1_00_00_00 +
+      String.to_integer(t.day) * 1_00_00 + String.to_integer(t.hour) * 1_00 +
+      String.to_integer(t.minute) + float
   end
 
   def getraw(%MyTime{} = t, format) do
     case format do
       :date ->
-        String.to_integer(t.year) * 1_000_000_000 + String.to_integer(t.month) * 1_000_000 +
-          String.to_integer(t.day) * 1_000
+        String.to_integer(t.year) * 1_00_00_00_00 + String.to_integer(t.month) * 1_00_00_00 +
+          String.to_integer(t.day) * 1_00_00
 
       :short ->
-        String.to_integer(t.hour) * 100 + String.to_integer(t.minute)
+        String.to_integer(t.hour) * 1_00 + String.to_integer(t.minute)
 
       _ ->
         getraw(t)
@@ -58,7 +65,7 @@ defmodule MyTime do
   end
 
   def get_to_string(%MyTime{} = t) do
-    "#{t.year}:#{t.month}:#{t.day}:#{t.hour}:#{t.minute}"
+    "#{t.year}:#{t.month}:#{t.day}:#{t.hour}:#{t.minute}:#{t.second}:#{t.millisecond}"
   end
 
   def get_to_string(%MyTime{} = t, format) do
