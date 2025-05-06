@@ -12,6 +12,10 @@ defmodule MyRouter do
     send_resp(conn, 200, "hello!")
   end
 
+  get "/:message" do
+    send_resp(conn, 200, "#{message}")
+  end
+
   forward("/user", to: MyRouter.UserRouter)
   forward("/chat", to: MyRouter.ChatRouter)
   forward("/ws", to: MyRouter.SocketRouter)
