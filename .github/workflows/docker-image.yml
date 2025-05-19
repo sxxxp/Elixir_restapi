@@ -14,6 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Create envs directory and .env files
+      run: |
+        mkdir envs
+        echo "DATABASE=${{ secrets.POSTGRES_DATABASE }}" >> envs/.env
+        echo "PG_USER=${{ secrets.POSTGRES_USER }}" >> envs/.env
+        echo "PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> envs/.env
+        echo "HOSTNAME=${{ secrets.POSTGRES_HOSTNAME }}" >> envs/.env
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2

@@ -8,7 +8,6 @@ COPY config ./config
 
 COPY chat_logs ./chat_logs
 COPY priv ./priv
-COPY envs ./envs
 RUN apt-get update && \
     mix local.hex --force && \
     mix local.rebar --force && \
