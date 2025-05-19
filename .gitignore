@@ -23,6 +23,7 @@ restapi-*.tar
 /tmp/
 
 # Ignore the generated secret key file
+envs/
 .env
 
 # Ignore the database file

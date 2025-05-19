@@ -8,11 +8,11 @@ defmodule MyApp.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      {Bandit, plug: MyRouter, scheme: :http, port: 4000}
+      {Bandit, plug: MyRouter, scheme: :http, port: 4000},
+      MyApp.Repo
     ]
 
     :pg.start_link()
-
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MyApp.Supervisor]

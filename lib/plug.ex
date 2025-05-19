@@ -7,4 +7,15 @@ defmodule MyPlug do
   def call(conn, _opts) do
     conn
   end
+
+  def database do
+    quote do
+      alias MyApp.Repo, as: PG
+      alias Schema.User, as: User
+    end
+  end
+
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
 end

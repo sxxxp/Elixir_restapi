@@ -3,6 +3,7 @@ defmodule Router do
     quote do
       use Plug.Router
       import Plug.Router
+      import MyUtil
       plug(Plug.Logger)
 
       plug(Plug.Parsers,

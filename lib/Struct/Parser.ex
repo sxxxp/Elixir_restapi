@@ -1,5 +1,4 @@
 import Struct.Chat
-import Jason
 
 defmodule Struct.Parser do
   def messageToStruct(message) do

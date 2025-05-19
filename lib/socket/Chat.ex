@@ -2,8 +2,6 @@ defmodule Socket.Chat do
   @behaviour WebSock
   import ChatLogger
   import Struct.Parser, only: [messageToStruct: 1]
-  import Struct.Chat
-  import MyTime
 
   def init(options) do
     :pg.join({:chat_room, options[:id]}, self())
