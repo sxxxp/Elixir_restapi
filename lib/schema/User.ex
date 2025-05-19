@@ -8,6 +8,7 @@ defmodule Schema.User do
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
     field(:age, :integer)
+
     timestamps()
   end
 
