@@ -15,5 +15,6 @@ RUN apt-get update && \
     mix ecto.create && \
     mix ecto.migrate
 
+    
 CMD ["mix", "run", "--no-halt"]
 EXPOSE 4000
