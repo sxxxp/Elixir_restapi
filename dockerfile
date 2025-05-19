@@ -13,6 +13,5 @@ RUN apt-get update && \
     mix local.rebar --force && \
     mix deps.get
 
-
 CMD ["mix", "run", "--no-halt"]
 EXPOSE 4000
