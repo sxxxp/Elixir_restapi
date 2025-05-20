@@ -1,17 +1,37 @@
-FROM elixir:latest
+# 1단계: Build Stage
+FROM hexpm/elixir:1.15.7-erlang-26.2-alpine-3.18 AS builder
 
-MAINTAINER sxxxp "junhyeonsin@gmail.com"
+WORKDIR /app
 
 COPY mix.exs mix.lock ./
-COPY lib ./lib
 COPY config ./config
-COPY chat_logs ./chat_logs
+COPY lib ./lib
 COPY priv ./priv
+COPY chat_logs ./chat_logs
+COPY error_log ./error_log
 
-RUN apt-get update && \
-    mix local.hex --force && \
+ENV MIX_ENV=prod
+
+RUN mix local.hex --force && \
     mix local.rebar --force && \
-    mix deps.get
+    mix deps.get --only prod && \
+    mix deps.compile && \
+    mix release
 
-CMD ["mix", "run", "--no-halt"]
-EXPOSE 4000
+# 2단계: Runtime Stage
+FROM alpine:3.18 AS runtime
+
+# 앱 실행에 필요한 최소 패키지
+RUN apk add --no-cache openssl ncurses-libs libstdc++
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 릴리즈된 파일만 복사
+COPY --from=builder /app/_build/prod/rel/restapi ./
+
+# 기본 포트 설정 (선택)
+ENV port=4000
+
+# 실행 명령
+CMD ["bin/restapi", "start"]
