@@ -18,7 +18,7 @@ defmodule MyRouter.UserRouter do
       :error ->
         send_resp(conn, 400, "Invalid ID format")
 
-      _ ->
+      {id, ""} ->
         user = PG.get(User, id)
 
         case user do
