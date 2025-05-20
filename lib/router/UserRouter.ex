@@ -85,7 +85,7 @@ defmodule MyRouter.UserRouter do
 
         case user do
           {:ok, user} ->
-            send_resp(conn, 200, MyUtil.keyword_to_json(%{name: user.name, email: user.email}))
+            send_resp(conn, 200, MyUtil.keyword_to_json(name: user.name, email: user.email))
 
           {:error, changeset} ->
             case changeset.errors do
