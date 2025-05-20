@@ -88,7 +88,7 @@ defmodule MyRouter.UserRouter do
             send_resp(conn, 200, MyUtil.keyword_to_json(%{name: user.name, email: user.email}))
 
           {:error, changeset} ->
-            case changeset.errors[0] do
+            case changeset.errors do
               {"has already been taken", _} ->
                 send_resp(conn, 409, "이미 유저가 존재합니다.")
 
