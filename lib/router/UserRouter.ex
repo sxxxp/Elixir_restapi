@@ -12,14 +12,22 @@ defmodule MyRouter.UserRouter do
   end
 
   get "/:id" do
-    user = PG.get(User, id)
+    id = Integer.parse(id)
 
-    case user do
-      %User{} ->
-        send_resp(conn, 200, "User: #{user.name}, #{user.email}, #{user.age}")
+    case id do
+      :error ->
+        send_resp(conn, 400, "Invalid ID format")
 
-      nil ->
-        send_resp(conn, 404, "User not found")
+      _ ->
+        user = PG.get(User, id)
+
+        case user do
+          %User{} ->
+            send_resp(conn, 200, "User: #{user.name}, #{user.email}, #{user.age}")
+
+          nil ->
+            send_resp(conn, 404, "User not found")
+        end
     end
   end
 
