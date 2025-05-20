@@ -13,7 +13,7 @@ defmodule Schema.User do
 
   def changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:name, :email, :age, :password])
+    |> cast(params, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
     |> validate_format(:email, ~r/@/)
     |> encrypt_password()
