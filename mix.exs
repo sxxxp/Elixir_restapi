@@ -7,12 +7,12 @@ defmodule Restapi.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18.3",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
-      # releases: [
-      #   restapi: [
-      #     include_executables_for: [:unix]
-      #   ]
-      # ]
+      deps: deps(),
+      releases: [
+        restapi: [
+          include_executables_for: [:unix]
+        ]
+      ]
     ]
   end
 

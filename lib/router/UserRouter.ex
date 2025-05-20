@@ -89,8 +89,11 @@ defmodule MyRouter.UserRouter do
 
           {:error, changeset} ->
             case changeset.errors do
-              {"has already been taken", _} ->
-                send_resp(conn, 409, "이미 유저가 존재합니다.")
+              [name: {"has already been taken", _}] ->
+                send_resp(conn, 409, "이미 이름이 존재합니다.")
+
+              [email: {"has already been taken", _}] ->
+                send_resp(conn, 409, "이미 이메일이 존재합니다.")
 
               {_, _} ->
                 ErrorLogger.elog("MyRouter.UserRouter", "유저 생성에 실패했습니다.")
