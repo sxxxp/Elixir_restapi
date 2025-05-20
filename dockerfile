@@ -1,5 +1,5 @@
 # 1단계: Build Stage
-FROM hexpm/elixir:1.15.7-erlang-26.2-alpine-3.18 AS builder
+FROM hexpm/elixir:1.18.3-erlang-25.3.2.21-alpine-3.19.7 AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN mix local.hex --force && \
     mix release
 
 # 2단계: Runtime Stage
-FROM alpine:3.18 AS runtime
+FROM alpine:3.19.7 AS runtime
 
 # 앱 실행에 필요한 최소 패키지
 RUN apk add --no-cache openssl ncurses-libs libstdc++
