@@ -69,16 +69,16 @@ defmodule MyRouter.UserRouter do
   post "/register" do
     case [name, password, email] =
            extract_params(conn.params, ["name", "password", "email"]) do
-      [nil, _, _, _] ->
+      [nil, _, _] ->
         send_resp(conn, 400, "Missing name")
 
-      [_, nil, _, _] ->
+      [_, nil, _] ->
         send_resp(conn, 400, "Missing password")
 
-      [_, _, nil, _] ->
+      [_, _, nil] ->
         send_resp(conn, 400, "Missing email")
 
-      [_, _, _, _] ->
+      [_, _, _] ->
         params = %{name: name, email: email, password: password}
         changeset = User.changeset(%User{}, params)
         user = PG.insert(changeset)
