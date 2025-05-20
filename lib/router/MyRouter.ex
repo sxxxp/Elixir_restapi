@@ -11,6 +11,10 @@ defmodule MyRouter do
     send_resp(conn, 200, "hello!")
   end
 
+  get "/favicon.ico" do
+    send_resp(conn, 200, "hello!")
+  end
+
   get "/:message" do
     send_resp(conn, 200, "#{message}")
   end

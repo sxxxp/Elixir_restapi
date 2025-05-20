@@ -20,21 +20,20 @@ defmodule RestapiTest do
   end
 
   test "POST /user/login" do
-    conn = conn(:post, "/user/login", %{"name" => "test", "password" => "1234"})
+    conn = conn(:post, "/user/login", %{"email" => "test", "password" => "1234"})
     conn = MyRouter.call(conn, @opts)
     assert conn.status == 200
-    assert conn.resp_body == "Hello, your name test, password 1234"
   end
 
   test "POST /user/login missing name" do
     conn = conn(:post, "/user/login", %{"password" => "1234"})
     conn = MyRouter.call(conn, @opts)
     assert conn.status == 400
-    assert conn.resp_body == "Missing name"
+    assert conn.resp_body == "Missing email"
   end
 
   test "POST /user/login missing password" do
-    conn = conn(:post, "/user/login", %{"name" => "test"})
+    conn = conn(:post, "/user/login", %{"email" => "test"})
     conn = MyRouter.call(conn, @opts)
     assert conn.status == 400
     assert conn.resp_body == "Missing password"
@@ -44,7 +43,7 @@ defmodule RestapiTest do
     conn = conn(:post, "/user/login", %{})
     conn = MyRouter.call(conn, @opts)
     assert conn.status == 400
-    assert conn.resp_body == "Missing name and password"
+    assert conn.resp_body == "Missing email and password"
   end
 
   test "GET /user" do

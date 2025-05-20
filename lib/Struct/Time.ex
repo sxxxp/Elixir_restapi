@@ -39,6 +39,20 @@ defmodule MyTime do
     }
   end
 
+  def now do
+    ndt = NaiveDateTime.utc_now()
+
+    %MyTime{
+      year: ndt.year,
+      month: ndt.month,
+      day: ndt.day,
+      hour: ndt.hour,
+      minute: ndt.minute,
+      second: ndt.second,
+      millisecond: div(ndt.microsecond |> elem(0), 1000)
+    }
+  end
+
   def getraw(%MyTime{} = t) do
     float =
       ((String.to_integer(t.second) +

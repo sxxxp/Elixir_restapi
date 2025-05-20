@@ -14,7 +14,8 @@ defmodule ChatLogger do
       {:ok, content} ->
         content
 
-      {:error, _reason} ->
+      {:error, reason} ->
+        ErrorLogger.elog("ChatLogger", "Error reading log file: #{reason}")
         ""
     end
   end
@@ -26,7 +27,8 @@ defmodule ChatLogger do
       {:ok, content} ->
         content |> String.split("\n", trim: true) |> List.last()
 
-      {:error, _reason} ->
+      {:error, reason} ->
+        ErrorLogger.elog("ChatLogger", "Error reading log file: #{reason}")
         ""
     end
   end

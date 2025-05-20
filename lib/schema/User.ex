@@ -7,7 +7,6 @@ defmodule Schema.User do
     field(:email, :string)
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
-    field(:age, :integer)
 
     timestamps()
   end
@@ -17,7 +16,6 @@ defmodule Schema.User do
     |> cast(params, [:name, :email, :age, :password])
     |> validate_required([:name, :email, :password])
     |> validate_format(:email, ~r/@/)
-    |> validate_inclusion(:age, 0..150)
     |> encrypt_password()
     |> unique_constraint(:email, name: :users_email_index)
     |> unique_constraint(:name, name: :users_name_index)
