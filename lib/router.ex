@@ -13,7 +13,7 @@ defmodule Router do
         json_decoder: Jason
       )
 
-      plug(CORSPlug, origin: ["http://localhost:80"])
+      plug(CORSPlug, origin: ["http://localhost:80", "http://localhost:3000"])
 
       plug(:match)
       plug(:dispatch)
