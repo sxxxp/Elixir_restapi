@@ -23,6 +23,10 @@ defmodule MyRouter do
   forward("/chat", to: MyRouter.ChatRouter)
   forward("/ws", to: MyRouter.SocketRouter)
 
+  options _ do
+    send_resp(conn, 204, "")
+  end
+
   match _ do
     send_resp(conn, 404, "Not Found")
   end
