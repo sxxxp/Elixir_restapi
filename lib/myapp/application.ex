@@ -31,6 +31,22 @@ defmodule MyApp.Release do
     end
   end
 
+  def drop do
+    Application.load(@app)
+
+    for repo <- Application.fetch_env!(@app, :ecto_repos) do
+      Ecto.Migrator.run(repo, migrations_path(repo), :down, all: true)
+    end
+  end
+
+  def create do
+    Application.load(@app)
+
+    for repo <- Application.fetch_env!(@app, :ecto_repos) do
+      Ecto.Migrator.run(repo, migrations_path(repo), :create, all: true)
+    end
+  end
+
   defp migrations_path(repo),
     do: priv_dir(repo, "migrations")
 
