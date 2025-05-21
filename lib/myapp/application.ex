@@ -46,12 +46,12 @@ defmodule MyApp.ReleaseTasks do
 
   defp run_migrations do
     path = Application.app_dir(:restapi, "priv/repo/migrations")
-    Ecto.Migrator.run(YourApp.Repo, path, :up, all: true)
+    Ecto.Migrator.run(MyApp.Repo, path, :up, all: true)
   end
 
   defp run_drop do
     path = Application.app_dir(:restapi, "priv/repo/migrations")
-    Ecto.Migrator.run(YourApp.Repo, path, :down, all: true)
+    Ecto.Migrator.run(MyApp.Repo, path, :down, all: true)
   end
 
   defp stop_dependencies do
