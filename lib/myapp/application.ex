@@ -37,6 +37,14 @@ defmodule MyApp.Release do
     Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
   end
 
+  def start_link do
+    Application.load(@app)
+
+    for repo <- Application.fetch_env!(@app, :ecto_repos) do
+      {:ok, _pid} = repo.start_link()
+    end
+  end
+
   def drop do
     Application.load(@app)
 
