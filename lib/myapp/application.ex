@@ -24,8 +24,6 @@ defmodule MyApp.Release do
   @app :restapi
 
   def migrate do
-    IO.inspect(priv_dir(repo, migrations_path(repo)), label: "Migration Path")
-
     for repo <- Application.fetch_env!(@app, :ecto_repos) do
       Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
     end
@@ -51,5 +49,5 @@ defmodule MyApp.Release do
     do: priv_dir(repo, "migrations")
 
   defp priv_dir(repo, path),
-    do: Path.join([:code.priv_dir(@app), Atom.to_string(repo), path])
+    do: Path.join([:code.priv_dir(@app), "repo", path])
 end
