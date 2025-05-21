@@ -20,34 +20,41 @@ defmodule MyApp.Application do
   end
 end
 
-defmodule MyApp.Release do
-  @app :restapi
+defmodule MyApp.ReleaseTasks do
+  @start_apps [
+    :crypto,
+    :ssl,
+    :postgrex,
+    :ecto
+  ]
 
   def migrate do
-    for repo <- Application.fetch_env!(@app, :ecto_repos) do
-      Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
-    end
+    start_dependencies()
+    run_migrations()
+    stop_dependencies()
   end
 
   def drop do
-    for repo <- Application.fetch_env!(@app, :ecto_repos) do
-      Ecto.Migrator.run(repo, migrations_path(repo), :down, all: true)
-    end
+    start_dependencies()
+    run_drop()
+    stop_dependencies()
   end
 
-  def create do
-    for repo <- Application.fetch_env!(@app, :ecto_repos) do
-      Ecto.Adapters.Postgres.storage_up(repo.config)
-    end
+  defp start_dependencies do
+    Enum.each(@start_apps, &Application.ensure_all_started/1)
   end
 
-  def rollback(repo, version) do
-    Ecto.Migrator.run(repo, migrations_path(repo), :down, to: version)
+  defp run_migrations do
+    path = Application.app_dir(:restapi, "priv/repo/migrations")
+    Ecto.Migrator.run(YourApp.Repo, path, :up, all: true)
   end
 
-  defp migrations_path(repo),
-    do: priv_dir(repo, "migrations")
+  defp run_drop do
+    path = Application.app_dir(:restapi, "priv/repo/migrations")
+    Ecto.Migrator.run(YourApp.Repo, path, :down, all: true)
+  end
 
-  defp priv_dir(repo, path),
-    do: Path.join([:code.priv_dir(@app), "repo", path])
+  defp stop_dependencies do
+    :init.stop()
+  end
 end
