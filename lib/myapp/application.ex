@@ -19,3 +19,21 @@ defmodule MyApp.Application do
     Supervisor.start_link(children, opts)
   end
 end
+
+defmodule MyApp.Release do
+  @app :my_app
+
+  def migrate do
+    Application.load(@app)
+
+    for repo <- Application.fetch_env!(@app, :ecto_repos) do
+      Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
+    end
+  end
+
+  defp migrations_path(repo),
+    do: priv_dir(repo, "migrations")
+
+  defp priv_dir(repo, path),
+    do: Path.join([:code.priv_dir(@app), Atom.to_string(repo), path])
+end
