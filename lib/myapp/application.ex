@@ -31,6 +31,12 @@ defmodule MyApp.Release do
     end
   end
 
+  def migrate(repo) do
+    Application.load(@app)
+
+    Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
+  end
+
   def drop do
     Application.load(@app)
 
@@ -45,6 +51,12 @@ defmodule MyApp.Release do
     for repo <- Application.fetch_env!(@app, :ecto_repos) do
       Ecto.Migrator.run(repo, migrations_path(repo), :create, all: true)
     end
+  end
+
+  def rollback(repo, version) do
+    Application.load(@app)
+
+    Ecto.Migrator.run(repo, migrations_path(repo), :down, to: version)
   end
 
   defp migrations_path(repo),
