@@ -24,47 +24,43 @@ defmodule MyApp.Release do
   @app :restapi
 
   def migrate do
-    Application.load(@app)
+    start_app()
 
     for repo <- Application.fetch_env!(@app, :ecto_repos) do
+      {:ok, _pid} = repo.start_link()
       Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
     end
   end
 
-  def migrate(repo) do
-    Application.load(@app)
-
-    Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
-  end
-
-  def start_link do
-    Application.load(@app)
+  def drop do
+    start_app()
 
     for repo <- Application.fetch_env!(@app, :ecto_repos) do
       {:ok, _pid} = repo.start_link()
-    end
-  end
-
-  def drop do
-    Application.load(@app)
-
-    for repo <- Application.fetch_env!(@app, :ecto_repos) do
       Ecto.Migrator.run(repo, migrations_path(repo), :down, all: true)
     end
   end
 
   def create do
-    Application.load(@app)
+    start_app()
 
     for repo <- Application.fetch_env!(@app, :ecto_repos) do
-      Ecto.Migrator.run(repo, migrations_path(repo), :create, all: true)
+      {:ok, _pid} = repo.start_link()
+      # 실제로는 Ecto.Adapters.SQL.query/4 등을 사용해야 할 수도 있음
+      Ecto.Adapters.Postgres.storage_up(repo.config)
     end
   end
 
   def rollback(repo, version) do
-    Application.load(@app)
+    start_app()
 
+    {:ok, _pid} = repo.start_link()
     Ecto.Migrator.run(repo, migrations_path(repo), :down, to: version)
+  end
+
+  defp start_app do
+    Application.load(@app)
+    Enum.each(Application.spec(@app, :applications), &Application.ensure_all_started/1)
   end
 
   defp migrations_path(repo),
