@@ -53,7 +53,8 @@ defmodule MyRouter.UserRouter do
                 200,
                 MyUtil.keyword_to_json(
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  image: user.image
                 )
               )
             else
@@ -61,7 +62,7 @@ defmodule MyRouter.UserRouter do
             end
 
           nil ->
-            send_resp(conn, 404, "User not found")
+            send_resp(conn, 401, "Invalid email")
         end
     end
   end
@@ -85,7 +86,11 @@ defmodule MyRouter.UserRouter do
 
         case user do
           {:ok, user} ->
-            send_resp(conn, 200, MyUtil.keyword_to_json(name: user.name, email: user.email))
+            send_resp(
+              conn,
+              200,
+              MyUtil.keyword_to_json(name: user.name, email: user.email, image: user.image)
+            )
 
           {:error, changeset} ->
             case changeset.errors do
