@@ -5,6 +5,7 @@ defmodule Schema.User do
   schema "users" do
     field(:name, :string)
     field(:email, :string)
+    field(:image, :string)
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
 
