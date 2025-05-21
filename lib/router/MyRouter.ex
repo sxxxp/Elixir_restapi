@@ -15,6 +15,21 @@ defmodule MyRouter do
     send_resp(conn, 200, "hello!")
   end
 
+  get "/migrate" do
+    path = Application.app_dir(:restapi, "priv/repo/migrations")
+    Ecto.Migrator.run(MyApp.Repo, path, :up, all: true)
+  end
+
+  get "/drop" do
+    path = Application.app_dir(:restapi, "priv/repo/migrations")
+    Ecto.Migrator.run(MyApp.Repo, path, :down, all: true)
+  end
+
+  get "/create" do
+    path = Application.app_dir(:restapi, "priv/repo/migrations")
+    Ecto.Migrator.run(MyApp.Repo, path, :create, all: true)
+  end
+
   get "/:message" do
     send_resp(conn, 200, "#{message}")
   end
