@@ -21,7 +21,7 @@ defmodule MyApp.Application do
 end
 
 defmodule MyApp.Release do
-  @app :my_app
+  @app :restapi
 
   def migrate do
     Application.load(@app)
