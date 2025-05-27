@@ -36,4 +36,6 @@ COPY --from=builder /app/_build/prod/rel/restapi ./
 ENV port=4000
 
 # 실행 명령
-CMD ["bin/restapi", "start"]
+RUN bin/restapi eval "MyApp.ReleaseTask.migrate"
+ENTRYPOINT ["bin/restapi"]
+CMD ["start"]
