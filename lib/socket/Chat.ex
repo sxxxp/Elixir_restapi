@@ -6,6 +6,8 @@ defmodule Socket.Chat do
   def init(options) do
     :pg.join({:chat_room, options[:id]}, self())
     IO.puts("Socket initialized")
+
+    options = Map.put(options, :pg, :pg.get_members({:chat_room, options[:id]}))
     {:ok, options}
   end
 
@@ -51,9 +53,13 @@ defmodule Socket.Chat do
   end
 
   def broadcast(:send, msg, state) do
-    for pid <- :pg.get_members({:chat_room, state[:id]}), pid != self() do
+    for pid <- state[:pg], pid != self() do
       send(pid, {:push, {:text, msg}, state})
     end
+
+    # for pid <- :pg.get_members({:chat_room, state[:id]}), pid != self() do
+    #   send(pid, {:push, {:text, msg}, state})
+    # end
   end
 
   def broadcast(:exit, msg, state) do
