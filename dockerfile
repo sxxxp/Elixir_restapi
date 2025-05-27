@@ -16,8 +16,6 @@ RUN mix local.hex --force && \
     mix local.rebar --force && \
     mix deps.get --only prod && \
     mix deps.compile && \
-    mix ecto.create && \
-    mix ecto.migrate && \ 
     mix release
 
 # 2단계: Runtime Stage
