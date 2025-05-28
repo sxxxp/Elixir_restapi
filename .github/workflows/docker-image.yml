@@ -21,7 +21,7 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/aa:elixir
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/elixir:lastest
 
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/aa:elixir
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/elixir:lastest
