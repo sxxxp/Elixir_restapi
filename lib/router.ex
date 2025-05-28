@@ -15,7 +15,7 @@ defmodule Router do
 
       plug(CORSPlug,
         origin: [
-          "http://127.0.0.1:" <> System.get_env("CLIENT_PORT", "3000")
+          "*"
         ]
       )
 
