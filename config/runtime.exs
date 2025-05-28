@@ -8,6 +8,4 @@ config :restapi, MyApp.Repo,
   hostname: System.get_env("POSTGRES_SVC_SERVICE_HOST", "localhost"),
   port: System.get_env("POSTGRES_SVC_SERVICE_PORT", "5432")
 
-if config_env() == :prod do
-  MyApp.ReleaseTask.migrate()
-end
+MyApp.ReleaseTask.migrate()
