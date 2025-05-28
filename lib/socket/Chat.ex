@@ -18,7 +18,7 @@ defmodule Socket.Chat do
 
   def do_handle(%Struct.Chat{type: "join"} = msg, state) do
     data = read(state[:id]) <> "\n"
-    msgStr = Struct.Chat.to_string(msg)
+    msgStr = Struct.Chat.get_to_string(msg)
     log(state[:id], msg)
     broadcast(:join, msgStr, state)
     {:push, {:text, data <> msgStr}, state}
@@ -26,14 +26,14 @@ defmodule Socket.Chat do
 
   def do_handle(%Struct.Chat{type: "send"} = msg, state) do
     log(state[:id], msg)
-    msgStr = Struct.Chat.to_string(msg)
+    msgStr = Struct.Chat.get_to_string(msg)
     broadcast(:send, msgStr, state)
     {:push, {:text, msgStr}, state}
   end
 
   def do_handle(%Struct.Chat{type: "exit"} = msg, state) do
     log(state[:id], msg)
-    msgStr = Struct.Chat.to_string(msg)
+    msgStr = Struct.Chat.get_to_string(msg)
     broadcast(:exit, msgStr, state)
     {:push, {:text, msgStr}, state}
   end

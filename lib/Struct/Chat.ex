@@ -18,16 +18,18 @@ defmodule Struct.Chat do
   def migrate(%{type: type, user: user, message: message, time: time}) do
     %Struct.Chat{
       type: type,
-      user: Jason.decode!(user),
+      user: user,
       message: message,
       time: MyTime.converter(time)
     }
   end
 
   def migrate(%Struct.Chat{} = msg) do
+    encode_user = Jason.encode!(msg.user)
+
     Jason.encode!(%{
       type: msg.type,
-      user: msg.user,
+      user: encode_user,
       message: msg.message,
       time: MyTime.get_to_string(msg.time)
     })
@@ -35,7 +37,14 @@ defmodule Struct.Chat do
 
   def migrate(_), do: {:error, :invalid_format}
 
-  def to_string(%Struct.Chat{} = msg) do
-    "{\"type\": \"#{msg.type}\",\"user\": \"#{Jason.encode!(msg.user)}\", \"message\": \"#{msg.message}\", \"time\": \"#{MyTime.get_to_string(msg.time)}\"}"
+  def get_to_string(%Struct.Chat{} = msg) do
+    encode_user = Jason.encode!(msg.user)
+
+    Jason.encode!(%{
+      type: msg.type,
+      user: encode_user,
+      message: msg.message,
+      time: MyTime.get_to_string(msg.time)
+    })
   end
 end

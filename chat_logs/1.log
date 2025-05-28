@@ -1,17 +1,20 @@
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:30:07:510"}
-{"type": "send","user": "ㅁㄴㅇㄹ", "message": "ㅇ", "time": "2025:05:12:12:30:08:872"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:30:12:307"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:30:52:209"}
-{"type": "send","user": "ㅁㄴㅇㄹ", "message": "ㅇㅇ", "time": "2025:05:12:12:31:01:975"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:32:20:826"}
-{"type": "send","user": "ㅁㄴㅇㄹ", "message": "ㅇㅇ", "time": "2025:05:12:12:32:25:585"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:32:43:131"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:33:28:165"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:34:26:869"}
-{"type": "send","user": "ㅁㄴㅇㄹ", "message": "머임", "time": "2025:05:12:12:34:29:712"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:36:57:096"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:37:40:852"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:38:07:755"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:12:12:38:46:689"}
-{"type": "exit","user": "[system]", "message": "ㅁㄴㅇㄹ 퇴장", "time": "2025:05:12:12:38:57:840"}
-{"type": "join","user": "[system]", "message": "ㅁㄴㅇㄹ 입장", "time": "2025:05:15:16:50:30:410"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:45:06:031","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:47:15:162","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:47:56:970","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"하이","type":"send","time":"2025:05:28:20:47:59:886","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"[object Object] 퇴장","type":"exit","time":"2025:05:28:20:48:06:065","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:48:09:733","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"하이","type":"send","time":"2025:05:28:20:48:11:772","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:49:12:030","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"신준현 퇴장","type":"exit","time":"2025:05:28:20:49:13:651","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"게스트 입장","type":"join","time":"2025:05:28:20:49:14:804","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"신준현 입장","type":"join","time":"2025:05:28:20:49:39:241","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"하이","type":"send","time":"2025:05:28:20:49:41:732","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"신준현 입장","type":"join","time":"2025:05:28:20:49:47:637","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"흠","type":"send","time":"2025:05:28:20:49:50:548","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"신준현 퇴장","type":"exit","time":"2025:05:28:20:50:05:221","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"신준현 입장","type":"join","time":"2025:05:28:20:50:06:367","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"안녕","type":"send","time":"2025:05:28:20:50:15:953","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"신준현 입장","type":"join","time":"2025:05:28:20:50:46:394","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
+{"message":"ㅇㅇ","type":"send","time":"2025:05:28:20:50:48:770","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
+{"message":"신준현 퇴장","type":"exit","time":"2025:05:28:20:50:50:231","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}

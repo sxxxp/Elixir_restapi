@@ -1,6 +1,6 @@
 defmodule ChatLogger do
   def log(room_id, %Struct.Chat{} = msg) do
-    File.write("chat_logs/#{room_id}.log", "#{Struct.Chat.to_string(msg)}\n", [:append])
+    File.write("chat_logs/#{room_id}.log", "#{Struct.Chat.get_to_string(msg)}\n", [:append])
   end
 
   def log(room_id, message) do
