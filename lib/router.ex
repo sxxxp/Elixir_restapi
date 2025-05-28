@@ -15,7 +15,7 @@ defmodule Router do
 
       plug(CORSPlug,
         origin: [
-          "*"
+          "localhost:3000"
         ]
       )
 
