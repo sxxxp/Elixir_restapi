@@ -16,6 +16,7 @@ defmodule ChatLogger do
 
       {:error, reason} ->
         ErrorLogger.elog("ChatLogger", "Error reading log file: #{reason}")
+        ""
     end
   end
 

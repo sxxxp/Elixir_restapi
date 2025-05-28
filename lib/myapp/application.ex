@@ -7,13 +7,14 @@ defmodule MyApp.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
+    MyApp.ReleaseTask.migrate()
+
     children = [
       {Bandit, plug: MyRouter, scheme: :http, port: System.get_env("port") || 4000},
       MyApp.Repo
     ]
 
     :pg.start_link()
-    MyApp.ReleaseTask.migrate()
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MyApp.Supervisor]
