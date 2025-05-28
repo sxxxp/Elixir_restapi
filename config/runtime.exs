@@ -6,4 +6,4 @@ config :restapi, MyApp.Repo,
   username: System.get_env("POSTGRES_USER", "postgres"),
   password: System.get_env("POSTGRES_PASSWORD", "postgres"),
   hostname: System.get_env("POSTGRES_SVC_SERVICE_HOST", "localhost"),
-  port: Systme.get_env("POSTGRES_SVC_SERVICE_PORT", 5432)
+  port: Systme.get_env("POSTGRES_SVC_SERVICE_PORT", "5432")
