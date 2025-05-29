@@ -22,7 +22,7 @@ defmodule RestapiTest do
   test "POST /user/login" do
     conn = conn(:post, "/user/login", %{"email" => "test", "password" => "1234"})
     conn = MyRouter.call(conn, @opts)
-    assert conn.status == 200
+    assert conn.status == 401
   end
 
   test "POST /user/login missing name" do
@@ -58,7 +58,7 @@ defmodule RestapiTest do
     conn = MyRouter.call(conn, @opts)
     user = PG.get(User, 1)
     assert conn.status == 200
-    assert conn.resp_body == "User: #{user.name}, #{user.email}, #{user.age}"
+    assert conn.resp_body == "User: #{user.name}, #{user.email}"
   end
 
   test "GET 404 /user/:id" do
@@ -74,7 +74,7 @@ defmodule RestapiTest do
     # Example query to fetch users older than 18 or with no email
     query =
       from(u in User,
-        where: u.age > 18 or is_nil(u.email),
+        where: u.image == "" or is_nil(u.email),
         select: u
       )
 
@@ -92,6 +92,6 @@ defmodule RestapiTest do
       })
 
     conn = MyRouter.call(conn, @opts)
-    assert conn.status == 400
+    assert conn.status == 409
   end
 end
