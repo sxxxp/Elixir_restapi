@@ -1,14 +1,22 @@
 defmodule ChatLogger do
   def log(room_id, %Struct.Chat{} = msg) do
-    File.write("chat_logs/#{room_id}.log", "#{Struct.Chat.get_to_string(msg)}\n", [:append])
+    File.write(
+      "#{System.get_env("CHAT_LOG_DIR", "logs/chat_logs/")}#{room_id}.log",
+      "#{Struct.Chat.get_to_string(msg)}\n",
+      [:append]
+    )
   end
 
   def log(room_id, message) do
-    File.write("chat_logs/#{room_id}.log", "#{message}\n", [:append])
+    File.write(
+      "#{System.get_env("CHAT_LOG_DIR", "logs/chat_logs/")}#{room_id}.log",
+      "#{message}\n",
+      [:append]
+    )
   end
 
   def read(room_id) do
-    file_path = "chat_logs/#{room_id}.log"
+    file_path = "#{System.get_env("CHAT_LOG_DIR", "logs/chat_logs/")}#{room_id}.log"
 
     case File.read(file_path) do
       {:ok, content} ->
@@ -21,7 +29,7 @@ defmodule ChatLogger do
   end
 
   def readLast(room_id) do
-    file_path = "chat_logs/#{room_id}.log"
+    file_path = "#{System.get_env("CHAT_LOG_DIR", "logs/chat_logs/")}#{room_id}.log"
 
     case File.read(file_path) do
       {:ok, content} ->

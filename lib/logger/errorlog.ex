@@ -10,14 +10,15 @@ defmodule ErrorLogger do
       |> MyTime.get_to_string()
 
     File.write(
-      "error_log/#{module}.log",
+      System.get_env("ERROR_LOG_DIR", "logs/error_logs/") <> "#{module}.log",
       MyUtil.keyword_to_json(message: message, time: time) <> "\n",
       [:append]
     )
   end
 
   def eread(module) do
-    file_path = "error_log/#{module}.log"
+    file_path =
+      System.get_env("ERROR_LOG_DIR", "logs/error_logs/") <> "#{module}.log"
 
     case File.read(file_path) do
       {:ok, content} ->
@@ -30,7 +31,8 @@ defmodule ErrorLogger do
   end
 
   def eread_recently(module) do
-    file_path = "error_log/#{module}.log"
+    file_path =
+      System.get_env("ERROR_LOG_DIR", "logs/error_logs/") <> "#{module}.log"
 
     case File.read(file_path) do
       {:ok, content} ->

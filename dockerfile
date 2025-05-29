@@ -7,9 +7,7 @@ COPY mix.exs mix.lock ./
 COPY config ./config
 COPY lib ./lib
 COPY priv ./priv
-COPY chat_logs ./chat_logs
-COPY error_log ./error_log
-
+COPY logs ./logs
 ENV MIX_ENV=prod
 
 RUN mix local.hex --force && \

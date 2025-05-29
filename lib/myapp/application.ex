@@ -7,7 +7,6 @@ defmodule MyApp.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
-    MyApp.ReleaseTask.migrate()
 
     children = [
       {Bandit, plug: MyRouter, scheme: :http, port: System.get_env("port") || 4000},
