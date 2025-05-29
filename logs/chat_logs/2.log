@@ -1,4 +1,0 @@
-{"message":"신준현 입장","type":"join","time":"2025:05:28:20:50:51:311","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
-{"message":"안녕하시기","type":"send","time":"2025:05:28:20:50:55:395","user":"{\"name\":\"신준현\",\"image\":null,\"email\":\"junhyeonsin@gmail.com\"}"}
-{"message":"신준현 퇴장","type":"exit","time":"2025:05:28:20:50:57:437","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
-{"message":"신준현 입장","type":"join","time":"2025:05:28:20:50:58:721","user":"{\"name\":\"[system]\",\"image\":\"\",\"email\":\"\"}"}
