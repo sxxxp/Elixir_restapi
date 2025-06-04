@@ -47,11 +47,7 @@ defmodule MyRouter.UserRouter do
 
         case user do
           %User{} ->
-            IO.inspect(System.os_time())
-
             if User.verify_password(password, user.password_hash) do
-              IO.inspect(System.os_time())
-
               send_resp(
                 conn,
                 200,
