@@ -12,6 +12,7 @@ defmodule MyPlug do
     quote do
       alias MyApp.Repo, as: PG
       alias Schema.User, as: User
+      alias Schema.Item, as: Item
     end
   end
 
