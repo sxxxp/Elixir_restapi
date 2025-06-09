@@ -7,13 +7,22 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set up branch name as TAG
+      id: vars
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          TAG=${{ github.head_ref }}
+        else
+          TAG=${{ github.ref_name }}
+        fi
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
@@ -21,7 +30,7 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/elixir:latest
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/elixir:${{ steps.vars.outputs.tag }}
 
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/elixir:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/elixir:${{ steps.vars.outputs.tag }}
