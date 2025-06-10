@@ -101,7 +101,7 @@ defmodule MyRouter.UserRouter do
                 send_resp(conn, 409, "이미 이메일이 존재합니다.")
 
               {_, _} ->
-                ErrorLogger.elog("MyRouter.UserRouter", "유저 생성에 실패했습니다.")
+                on_error("유저 생성에 실패했습니다. #{changeset}")
                 send_resp(conn, 500, "유저 생성에 실패했습니다.")
             end
         end
