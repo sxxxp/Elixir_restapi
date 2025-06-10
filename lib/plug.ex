@@ -13,6 +13,10 @@ defmodule MyPlug do
       alias MyApp.Repo, as: PG
       alias Schema.User, as: User
       alias Schema.Item, as: Item
+
+      def on_error(message) do
+        ErrorLogger.elog(__MODULE__, message)
+      end
     end
   end
 
